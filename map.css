@@ -1,109 +1,41 @@
-
-* {
-  box-sizing: border-box;
-}
-
 html,
 body {
-  width: 100%;
+  margin: 0;
+  padding: 5;
   height: 100%;
-  margin: 0;
-}
-
-body {
-  height: 100vh;
-  height: 100dvh;
-  padding: 12px 24px;
-
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-
-  gap: 10px;
-  overflow: hidden;
-
-  font: 100%/1.5 system-ui, sans-serif;
-}
-
-/* Header: title left, slider right */
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  min-width: 0;
-}
-
-.top-bar h1 {
-  margin: 0;
-  text-align: left;
-  white-space: nowrap;
-}
-
-/* Time slider */
-.time-filter {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
-
-  width: min(280px, 45vw);
-  line-height: 1.25;
-}
-
-#time-slider {
   width: 100%;
-  margin: 5px 0 2px;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
-.time-filter time,
-.time-filter em {
-  display: block;
-}
-
-.time-filter em {
-  color: #888;
-  font-style: italic;
-}
-
-/* Map in the middle */
 #map {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-
-  overflow: hidden;
-  border-radius: 8px;
-
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Adjust width to your desired size */
+  height: 100%; /* Adjust height to your desired size */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for effect */
+  border-radius: 8px; /* Optional: rounded corners */
 }
 
 #map svg {
   position: absolute;
-  inset: 0;
   z-index: 1;
-
   width: 100%;
   height: 100%;
-
   pointer-events: none;
 }
 
-/* Shared colors for circles and legend */
+/* shared color variables for circles AND legend swatches */
 #map svg circle,
 .legend > div {
   --color-departures: steelblue;
   --color-arrivals: darkorange;
-
   --color: color-mix(
     in oklch,
-    var(--color-departures)
-    calc(100% * var(--departure-ratio)),
+    var(--color-departures) calc(100% * var(--departure-ratio)),
     var(--color-arrivals)
   );
 }
 
-/* Map circles */
 #map svg circle {
   fill: var(--color);
   fill-opacity: 60%;
@@ -112,17 +44,13 @@ body {
   pointer-events: auto;
 }
 
-/* Legend at the bottom */
+/* Design 2: separate swatches and labels */
 .legend {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5em;
-
+  gap: 1.5em;              /* large gap between legend items */
   align-items: center;
   justify-content: center;
-
-  margin: 0;
-  padding: 4px 0;
+  margin-block: 1em;
 }
 
 .legend-label {
@@ -135,42 +63,33 @@ body {
 .legend > div {
   display: flex;
   align-items: center;
-  gap: 0.4em;
+  gap: 0.4em;              /* small gap, so swatch + label read as a unit */
 }
 
 .legend > div::before {
   content: "";
-
   width: 1.2em;
   height: 1.2em;
-  flex: 0 0 1.2em;
-
   border-radius: 50%;
   background: var(--color);
 }
 
-/* Smaller screens */
-@media (max-width: 600px) {
-  body {
-    padding: 10px;
-    gap: 8px;
-  }
+header {
+  display: flex;
+  gap: 1em;
+  align-items: baseline;
+}
 
-  .top-bar {
-    gap: 10px;
-  }
+header label {
+  margin-left: auto;
+}
 
-  .top-bar h1 {
-    font-size: 1.25rem;
-  }
+header time,
+header em {
+  display: block;   /* own line, so the slider doesn't shift as text changes */
+}
 
-  .time-filter {
-    width: 46%;
-    font-size: 0.9rem;
-  }
-
-  .legend {
-    gap: 0.7em 1em;
-    font-size: 0.85rem;
-  }
+header em {
+  color: #888;
+  font-style: italic;
 }

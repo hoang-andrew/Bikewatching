@@ -1,57 +1,34 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bikewatching</title>
-
-  <link
-    href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
-    rel="stylesheet"
-  />
-
-  <link rel="stylesheet" href="map_updated.css" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="global.css" />
+  <link rel="stylesheet" href="map.css" />
   <script src="map.js" type="module"></script>
 </head>
-
 <body>
-  <header class="top-bar">
-    <h1>🚴🏿‍♀️ Bikewatching</h1>
+<header>
+  <h1>🚴🏿‍♀️ Bikewatching</h1>
+  <label>
+    Filter by time:
+    <input id="time-slider" type="range" min="-1" max="1440" value="-1" />
+    <time id="selected-time"></time>
+    <em id="any-time">(any time)</em>
+  </label>
+</header>
 
-    <label class="time-filter">
-      <span>Filter by time:</span>
-      <input
-        id="time-slider"
-        type="range"
-        min="-1"
-        max="1440"
-        value="-1"
-      />
-      <time id="selected-time"></time>
-      <em id="any-time">(any time)</em>
-    </label>
-  </header>
+<div id="map">
+  <svg></svg>
+</div>
 
-  <div id="map">
-    <svg></svg>
-  </div>
-
-  <div class="legend">
-    <span class="legend-label">Legend:</span>
-
-    <div style="--departure-ratio: 1">
-      More departures
-    </div>
-
-    <div style="--departure-ratio: 0.5">
-      Balanced
-    </div>
-
-    <div style="--departure-ratio: 0">
-      More arrivals
-    </div>
-  </div>
+<div class="legend">
+  <span class="legend-label">Legend:</span>
+  <div style="--departure-ratio: 1">More departures</div>
+  <div style="--departure-ratio: 0.5">Balanced</div>
+  <div style="--departure-ratio: 0">More arrivals</div>
+</div>
 
 </body>
 </html>
