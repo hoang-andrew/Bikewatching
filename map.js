@@ -108,7 +108,7 @@ map.on('load', async () => {
 
   map.addSource('cambridge_route', {
     type: 'geojson',
-    data: 'PASTE_CAMBRIDGE_GEOJSON_URL_HERE',
+    data: 'https://raw.githubusercontent.com/cambridgegis/cambridgegis_data/main/Recreation/Bike_Facilities/RECREATION_BikeFacilities.geojson',
   });
   map.addLayer({
     id: 'cambridge-bike-lanes',
