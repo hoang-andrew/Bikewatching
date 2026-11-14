@@ -1,34 +1,19 @@
-header {
-  display: flex;
-  gap: 1em;
-  align-items: baseline;
-}
-
-header h1 {
+html,
+body {
   margin: 0;
-}
-
-header label {
-  margin-left: auto;
-}
-
-header time,
-header em {
-  display: block;   /* own line, so the slider doesn't shift as text changes */
-  text-align: right;
-}
-
-header em {
-  color: #888;
-  font-style: italic;
+  padding: 5;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
 #map {
-  flex: 1;                  /* map fills the space between header and legend */
-  min-height: 300px;
-  position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  width: 100%; /* Adjust width to your desired size */
+  height: 100%; /* Adjust height to your desired size */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for effect */
+  border-radius: 8px; /* Optional: rounded corners */
 }
 
 #map svg {
@@ -87,4 +72,24 @@ header em {
   height: 1.2em;
   border-radius: 50%;
   background: var(--color);
+}
+
+header {
+  display: flex;
+  gap: 1em;
+  align-items: baseline;
+}
+
+header label {
+  margin-left: auto;
+}
+
+header time,
+header em {
+  display: block;   /* own line, so the slider doesn't shift as text changes */
+}
+
+header em {
+  color: #888;
+  font-style: italic;
 }
