@@ -9,6 +9,10 @@ body {
   align-items: center; /* Center vertically */
 }
 
+header h1 {
+  margin: 0;
+}
+
 #map {
   width: 100%; /* Adjust width to your desired size */
   height: 100%; /* Adjust height to your desired size */
