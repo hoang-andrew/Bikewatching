@@ -1,53 +1,109 @@
+
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
-  margin: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  margin: 0;
 }
 
 body {
-  display: flex;
-  flex-direction: column;   /* header, map, legend stacked top to bottom */
-  align-items: stretch;     /* every child fills the full width */
-  box-sizing: border-box;
-  padding: 1em;
+  height: 100vh;
+  height: 100dvh;
+  padding: 12px 24px;
+
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+
+  gap: 10px;
+  overflow: hidden;
+
   font: 100%/1.5 system-ui, sans-serif;
 }
 
-header,
-.legend {
-  flex: none;               /* keep header and legend at their natural height */
+/* Header: title left, slider right */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-width: 0;
 }
 
+.top-bar h1 {
+  margin: 0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Time slider */
+.time-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+
+  width: min(280px, 45vw);
+  line-height: 1.25;
+}
+
+#time-slider {
+  width: 100%;
+  margin: 5px 0 2px;
+}
+
+.time-filter time,
+.time-filter em {
+  display: block;
+}
+
+.time-filter em {
+  color: #888;
+  font-style: italic;
+}
+
+/* Map in the middle */
 #map {
-  flex: 1;                  /* fill all remaining vertical space */
-  width: 100%;              /* fill the page horizontally */
-  min-height: 300px;        /* safety net so the map never collapses to 0 */
-  position: relative;       /* keeps the overlay SVG aligned with the map */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  overflow: hidden;
   border-radius: 8px;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #map svg {
   position: absolute;
+  inset: 0;
   z-index: 1;
+
   width: 100%;
   height: 100%;
+
   pointer-events: none;
 }
 
-/* shared color variables for circles AND legend swatches */
+/* Shared colors for circles and legend */
 #map svg circle,
 .legend > div {
   --color-departures: steelblue;
   --color-arrivals: darkorange;
+
   --color: color-mix(
     in oklch,
-    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-departures)
+    calc(100% * var(--departure-ratio)),
     var(--color-arrivals)
   );
 }
 
+/* Map circles */
 #map svg circle {
   fill: var(--color);
   fill-opacity: 60%;
@@ -56,13 +112,17 @@ header,
   pointer-events: auto;
 }
 
-/* Design 2: separate swatches and labels */
+/* Legend at the bottom */
 .legend {
   display: flex;
-  gap: 1.5em;              /* large gap between legend items */
+  flex-wrap: wrap;
+  gap: 1.5em;
+
   align-items: center;
   justify-content: center;
-  margin-block: 1em;
+
+  margin: 0;
+  padding: 4px 0;
 }
 
 .legend-label {
@@ -75,33 +135,42 @@ header,
 .legend > div {
   display: flex;
   align-items: center;
-  gap: 0.4em;              /* small gap, so swatch + label read as a unit */
+  gap: 0.4em;
 }
 
 .legend > div::before {
   content: "";
+
   width: 1.2em;
   height: 1.2em;
+  flex: 0 0 1.2em;
+
   border-radius: 50%;
   background: var(--color);
 }
 
-header {
-  display: flex;
-  gap: 1em;
-  align-items: baseline;
-}
+/* Smaller screens */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+    gap: 8px;
+  }
 
-header label {
-  margin-left: auto;
-}
+  .top-bar {
+    gap: 10px;
+  }
 
-header time,
-header em {
-  display: block;   /* own line, so the slider doesn't shift as text changes */
-}
+  .top-bar h1 {
+    font-size: 1.25rem;
+  }
 
-header em {
-  color: #888;
-  font-style: italic;
+  .time-filter {
+    width: 46%;
+    font-size: 0.9rem;
+  }
+
+  .legend {
+    gap: 0.7em 1em;
+    font-size: 0.85rem;
+  }
 }
