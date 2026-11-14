@@ -1,19 +1,31 @@
 html,
 body {
   margin: 0;
-  padding: 5;
   height: 100%;
   width: 100%;
+}
+
+body {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  flex-direction: column;   /* header, map, legend stacked top to bottom */
+  align-items: stretch;     /* every child fills the full width */
+  box-sizing: border-box;
+  padding: 1em;
+  font: 100%/1.5 system-ui, sans-serif;
+}
+
+header,
+.legend {
+  flex: none;               /* keep header and legend at their natural height */
 }
 
 #map {
-  width: 100%; /* Adjust width to your desired size */
-  height: 100%; /* Adjust height to your desired size */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for effect */
-  border-radius: 8px; /* Optional: rounded corners */
+  flex: 1;                  /* fill all remaining vertical space */
+  width: 100%;              /* fill the page horizontally */
+  min-height: 300px;        /* safety net so the map never collapses to 0 */
+  position: relative;       /* keeps the overlay SVG aligned with the map */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 #map svg {
